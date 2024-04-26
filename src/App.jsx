@@ -114,6 +114,39 @@ function App() {
     setState(newState);
   };
 
+  const addItem = (rootTitle, childTitle, itemTitleToAdd) => {
+    const newState = [];
+    const updatedRoot = { title: "", children: [] };
+    let indexWhereUpdatedRootNeedsToAdd = null;
+
+    state.forEach((root, index) => {
+      if (rootTitle === root.title) {
+        indexWhereUpdatedRootNeedsToAdd = index;
+        updatedRoot.title = rootTitle;
+        root.children.forEach((childOfRoot) => {
+          if (childOfRoot.title === childTitle) {
+            const updatedItems = childOfRoot.children;
+            updatedItems.push({ title: itemTitleToAdd });
+
+            const newChild = {
+              title: childOfRoot.title,
+              children: updatedItems,
+            };
+
+            updatedRoot.children.push(newChild);
+          } else {
+            updatedRoot.children.push(childOfRoot);
+          }
+        });
+      } else {
+        newState.push(root);
+      }
+    });
+
+    newState.splice(indexWhereUpdatedRootNeedsToAdd, 0, updatedRoot);
+    setState(newState);
+  };
+
   return (
     <>
       <input
@@ -135,6 +168,7 @@ function App() {
         itemDelete={itemDelete}
         addRoot={addRoot}
         addChild={addChild}
+        addItem={addItem}
       />
     </>
   );

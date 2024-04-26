@@ -8,6 +8,7 @@ const TreeComponent = ({
   childDelete,
   itemDelete,
   addChild,
+  addItem,
 }) => {
   const [inputs, setInputs] = useState({});
   console.log(inputs);
@@ -34,7 +35,10 @@ const TreeComponent = ({
                   />
                   <button
                     disabled={!inputs[rootTitle]}
-                    onClick={() => addChild(rootTitle, inputs[rootTitle])}
+                    onClick={() => {
+                      addChild(rootTitle, inputs[rootTitle]);
+                      setInputs({ ...inputs, [rootTitle]: "" });
+                    }}
                   >
                     Add
                   </button>
@@ -56,6 +60,32 @@ const TreeComponent = ({
                             onClick={() => childDelete(rootTitle, childTitle)}
                           >
                             delete
+                          </button>
+                          <br />
+                          <input
+                            value={inputs[`${rootTitle}.${childTitle}`] ?? ""}
+                            onChange={(e) =>
+                              setInputs({
+                                ...inputs,
+                                [`${rootTitle}.${childTitle}`]: e.target.value,
+                              })
+                            }
+                          />
+                          <button
+                            disabled={!inputs[`${rootTitle}.${childTitle}`]}
+                            onClick={() => {
+                              addItem(
+                                rootTitle,
+                                childTitle,
+                                inputs[`${rootTitle}.${childTitle}`]
+                              );
+                              setInputs({
+                                ...inputs,
+                                [`${rootTitle}.${childTitle}`]: "",
+                              });
+                            }}
+                          >
+                            Add
                           </button>
                         </div>
                       }
