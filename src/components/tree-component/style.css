@@ -1,0 +1,12 @@
+.child{
+    padding-left: 50px;
+}
+
+.sub-item{
+    padding-left: 100px;
+}
+
+.delete-btn{
+     background-color: rgb(255, 54, 32);
+     color: #f1f1f1;
+    }

@@ -1,0 +1,10 @@
+.title-btn-container{
+   display: flex;
+   gap: 12px;
+   margin-bottom: 4px;
+}
+
+.title-btn-container .toggle-btn{
+   background-color: rgb(44, 146, 255);
+   color: #f1f1f1;
+}
